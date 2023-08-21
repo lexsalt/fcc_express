@@ -65,6 +65,15 @@ app.get("/:word/echo", (req, res) => {
 });
 
 
+app.get("/name", (req, res) => {
+    //res.send('GET request called');
+    let firstName = req.query.first
+    let lastName = req.query.last
+    res.json({
+      name: `${firstName} ${lastName}`
+    })
+})
+
 
 
 
