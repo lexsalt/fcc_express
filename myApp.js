@@ -1,9 +1,13 @@
 let express = require('express');
 let app = express();
 require("dotenv").config()
+let bodyParser = require("body-parser")
 //console.log(process.env.MESSAGE_STYLE)
 
-console.log('Hello World')
+//console.log('Hello World')
+
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json());
 
 app.use(function middleware(req, res, next){
   //console.log("I'm a middleware...");
@@ -64,7 +68,13 @@ app.get("/:word/echo", (req, res) => {
   });
 });
 
-
+app.post("/name", (req,res) => {
+  let firstName = req.body.first
+    let lastName = req.body.last
+    res.json({
+      name: `${firstName} ${lastName}`
+    })
+})
 app.get("/name", (req, res) => {
     //res.send('GET request called');
     let firstName = req.query.first
