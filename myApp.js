@@ -7,10 +7,10 @@ console.log('Hello World')
 
 app.use(function middleware(req, res, next){
   //console.log("I'm a middleware...");
-  var met = req.method
-  var pathing = req.path
-  var ipAddress = req.ip
-  console.log(met+" "+pathing+" - "+ ipAddress)
+  //var met = req.method
+  //var pathing = req.path
+  //var ipAddress = req.ip
+  console.log(req.method+" "+req.path+" - "+req.ip)
   next();
 })
 
