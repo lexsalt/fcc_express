@@ -1,9 +1,18 @@
 let express = require('express');
 let app = express();
 require("dotenv").config()
-console.log(process.env.MESSAGE_STYLE)
+//console.log(process.env.MESSAGE_STYLE)
 
 console.log('Hello World')
+
+app.use(function middleware(req, res, next){
+  //console.log("I'm a middleware...");
+  var met = req.method
+  var pathing = req.path
+  var ipAddress = req.ip
+  console.log(met+" "+pathing+" - "+ ipAddress)
+  next();
+})
 
 // app.get("/", function(req, res) {
 //     res.send("Hello World");
@@ -21,8 +30,20 @@ app.get("/", function(req, res) {
 // });
 
 app.get("/json", function(req, res) {
-  res.json({ message: 'Hello json'});
+  var temp = "Hello Json"
+  //console.log(temp.toUpperCase())
+  if (process.env.MESSAGE_STYLE === "uppercase") {
+    res.json ({
+      message: temp.toUpperCase()
+    })
+    //console.log(temp.toUpperCase())
+  } else if (process.env.MESSAGE_STYLE !== "uppercase") {
+    res.json({ message: 'Hello json'});
+  }
 });
+
+
+
 
 // arrow function
 // app.get("/json", (req, res) => {
@@ -39,61 +60,4 @@ app.get("/json", function(req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = app;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- module.exports = app;
